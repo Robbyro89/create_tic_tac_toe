@@ -9,11 +9,11 @@ class Cases
 
  #fonction pour changer la valeur de la case et y mettre ce qu'on veut 
   def fill_up_case(pion) 		
-	self.value = pion
+	self.position = pion
   end
 
  #fonction pour verifier si la case est deja remplie ou non
   def check_if_empty
-	true if self.value == " " 		
+	true if self.position == " " 		
   end
 end

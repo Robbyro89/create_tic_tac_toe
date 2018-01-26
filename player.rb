@@ -25,7 +25,7 @@ class Player
  
  #phrase qui sert a enregistrer le choix de case du joueur
   def success_case
-	puts "  - hmmm #{@name}, t'as pas trouver mieux ? #{@answer_play}"  
+	puts "  - Ok #{@name}, c'est ton choix #{@answer_play}"  
 	puts " "
   end
 
@@ -37,7 +37,7 @@ class Player
 
  #phrase lorsque le joueur a gagne
   def winner
-	puts "  - WoooW #{@name} !!!! Tu m'impressionne !!! "
+	puts "  - WoooW #{@name} !!!! Tu m'impressionne, Tu as gagne !!! "
 	puts " "
   end
 end

@@ -26,21 +26,21 @@ class Game
 	@c2 = Cases.new("c2", " ")
 	@c3 = Cases.new("c3", " ")
 
-    puts "  __________________________________________________________________________________________________  "
-    puts " | __                __  ________   _          ________   ________       __      __       ________  | "
-    puts " | \ \      __      / / |  ______| | |        | _______| | ______ |     /  \    /  \     |  ______| | "
-    puts " |  \ \    /  \    / /  | |___     | |        | |        | |    | |    / /\ \  / /\ \    | |___     | "
-    puts " |   \ \  / /\ \  / /   |  ___|    | |        | |        | |    | |   / /  \ \/ /  \ \   |  ___|    | "
-    puts " |    \ \/ /  \ \/ /    | |______  | |______  | |______  | |____| |  / /    \__/    \ \  | |______  | "
-    puts " |     \__/    \__/     |________| |________| |________| |________| /_/              \_\ |________| | "
-    puts " |__________________________________________      TO       _________________________________________| "
-    puts " |                                           TIC  TAC  TOE                                          | "
-    puts " |__________________________________________________________________________________________________| "
+    puts "  ________________________________________________________________________________________________________  "
+    puts " |  __       ___       __   ________   __          ________   ________       ___       ___       ________  | "
+    puts " | l  l     l   l     l  l l  ______l l  l        l   _____l l   __   l     l   l     l   l     l  ______l | "
+    puts " |  l  l   l  _  l   l  l  l  l__     l  l        l  l       l  l  l  l    l     l   l     l    l  l__     | "
+    puts " |   l  l_l  l l  l_l  l   l   __l    l  l        l  l       l  l  l  l   l  l_l  l_l  l_l  l   l  ___l    | "
+    puts " |    l     l   l     l    l  l_____  l  l_____   l  l_____  l  l__l  l  l  l   l     l   l  l  l  l_____  | "
+    puts " |     l___l     l___l     l________l l________l  l________l l________l l__l     l___l     l__l l________l | "
+    puts " |____________________________________________       TO      ______________________________________________| "
+    puts " |                                             TIC  TAC  TOE                                               | "
+    puts " |_________________________________________________________________________________________________________| "
 
  #On cree un Board et on definit ses 9 variables (voir Classe Board) comme etant la valeur de nos 9 cases, soit " "
  #on affiche un Board, qui sera vide
  #on cree un array avec toutes nos cases, qui sert a garder a jour les valeurs des cases au fur et a mesure de l'avancee du jeu
-	@the_board = Board.new(@a1.value, @a2.value, @a3.value, @b1.value, @b2.value, @b3.value, @c1.value, @c2.value, @c3.value) 
+	@the_board = Board.new(@a1.position, @a2.position, @a3.position, @b1.position, @b2.position, @b3.position, @c1.position, @c2.position, @c3.position) 
 	@the_board.display 
 	@array = [@a1, @a2, @a3, @b1, @b2, @b3, @c1, @c2, @c3] 
   end
@@ -49,7 +49,7 @@ class Game
  #on cree un nouveau tableau avec les nouvelles valeurs de array (qui contient 9 cases)
  #on affiche le nouveau Board - soit le board mis a jour
   def update_board 
-	@the_board = Board.new(array[0].value, array[1].value, array[2].value, array[3].value, array[4].value, array[5].value, array[6].value, array[7].value, array[8].value) 
+	@the_board = Board.new(array[0].position, array[1].position, array[2].position, array[3].position, array[4].position, array[5].position, array[6].position, array[7].position, array[8].position) 
 	@the_board.display 
   end
 
@@ -58,21 +58,21 @@ class Game
   def check_if_victory 
 	@victory = false 
 	  case
-	 	when array[0].value == @a1.value && array[1].value == array[2].value && array[2].value != " " 
+	 	when array[0].position == @a1.position && array[1].position == array[2].position && array[2].position != " " 
 	     @victory = true
-		when array[3].value == array[4].value && array[4].value == array[5].value && array[5].value != " "
+		when array[3].position == array[4].position && array[4].position == array[5].position && array[5].position != " "
 		 @victory = true
-		when array[6].value == array[7].value && array[7].value == array[8].value && array[8].value != " "
+		when array[6].position == array[7].position && array[7].position == array[8].position && array[8].position != " "
 		 @victory = true
-		when array[0].value == array[3].value && array[3].value == array[6].value && array[6].value != " "
+		when array[0].position == array[3].position && array[3].position == array[6].position && array[6].position != " "
 	     @victory = true
-		when array[1].value == array[4].value && array[4].value == array[7].value && array[7].value != " "
+		when array[1].position == array[4].position && array[4].position == array[7].position && array[7].position != " "
 		 @victory = true
-		when array[2].value == array[5].value && array[5].value == array[8].value && array[8].value != " "
+		when array[2].position == array[5].position && array[5].position == array[8].position && array[8].position != " "
 		 @victory = true
-		when array[0].value == array[4].value && array[4].value == array[8].value && array[8].value != " "
+		when array[0].position == array[4].position && array[4].position == array[8].position && array[8].position != " "
 		 @victory = true
-		when array[2].value == array[4].value && array[4].value == array[6].value && array[6].value != " "
+		when array[2].position == array[4].position && array[4].position == array[6].position && array[6].position != " "
 		 @victory = true
 	  end
   end
@@ -84,10 +84,10 @@ class Game
  #on relance ask_play pour demander au joueur une autre coordonnee
   def first_player_plays 
 	@choice_player1 = first_player.ask_play 
-	  unless first_player.verification_coordonnees == true 
-	         first_player.error 
-	 	     @choice_player1 = first_player.ask_play
-	  end
+	unless first_player.verification_coordonnees == true 
+	       first_player.error 
+	 	   @choice_player1 = first_player.ask_play
+	end
 
  #pour chacun des elements du array stockant les cases
  #si le nom de la case = au choix du joueur et si la case et vide
@@ -123,10 +123,10 @@ class Game
  #exactement pareil que la methode pour le first_player
   def second_player_plays
 	@choice_player2 = second_player.ask_play
-	  unless second_player.verification_coordonnees == true 
-	  	     second_player.error
-	 	     @choice_player2 = second_player.ask_play
-	  end
+	unless second_player.verification_coordonnees == true 
+	  	   second_player.error
+	 	   @choice_player2 = second_player.ask_play
+	end
 
 	@array.map do |x|
 	  if x.value == @choice_player2 && x.check_if_empty
@@ -157,21 +157,21 @@ class Game
 
  #fonction qui demande aux joueurs s'ils veulent rejouer une partie
   def another_game
-  	puts " ______________________________________"
-  	puts "|--------------------------------------|"
-	puts "|-\oo/- On s'en refait une ? o/n -\oo/-|"
-    puts "|-/oo\---- Ou t'as la frousse ----/oo\-|"
-    puts "|______________________________________|"
+  	puts "  ______________________________________"
+  	puts " |--------------------------------------|"
+	puts " |--||-- On s'en refait une ? o/n --||--|"
+    puts " |--||----- Ou t'as la frousse -----||--|"
+    puts " |______________________________________|"
 
 
   @another_answer = gets.chomp.downcase
  #si la reponse est oui
 	if another_answer == "o"  
-	puts " ______________________________________"
-  	puts "|--------------------------------------|"
-	puts "|-\oo/------- C'est darty --------\oo/-|"
-    puts "|-/oo\--------- Mon Kiki ---------/oo\-|"
-    puts "|______________________________________|"
+	puts "  ______________________________________"
+  	puts " |--------------------------------------|"
+	puts " |--||-------- C'est darty ---------||--|"
+    puts " |--||---------- Mon Kiki ----------||--|"
+    puts " |______________________________________|"
 
  #creation d'un nouveau board
  #on change la variable de victory a false
@@ -180,11 +180,11 @@ class Game
 	  victory == false 
 	  play_until_victory
  #sinon, message d'aurevoir et exit pour sortir du programme 
-	else puts " ______________________________________"
-  	     puts "|--------------------------------------|"
-	     puts "|-\oo/------- Allez degage -------\oo/-|"
-         puts "|-/oo\-------- FROUSSARD ---------/oo\-|"
-         puts "|______________________________________|"
+	else puts "  ______________________________________"
+  	     puts " |--------------------------------------|"
+	     puts " |--||-------- Allez degage --------||--|"
+         puts " |--||--------- FROUSSARD ----------||--|"
+         puts " |______________________________________|"
 	  exit
 	end
   end
